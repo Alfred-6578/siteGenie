@@ -1,114 +1,84 @@
-🚀 Business Landing Page Generator
+# 🚀 siteGenie
 
-A component-driven landing page system for building clean, professional business websites quickly — without rebuilding the same layouts over and over.
+**A component-driven system for building professional business landing pages — fast, clean, and maintainable.**
 
-🧠 The Idea
+---
 
-Small businesses often need a simple, polished landing page — not a complex CMS or bloated website builder.
+## 🧠 Why This Exists
 
-From a developer’s perspective, building these pages repeatedly leads to:
+Small businesses need polished landing pages, not bloated website builders.
 
-duplicated layouts
+Developers keep rebuilding the same layouts with:
+- Duplicated code
+- Inconsistent UI decisions  
+- Hard-to-maintain structure
 
-inconsistent UI decisions
+**siteGenie treats landing pages as reusable systems, not one-off designs.**
 
-hard-to-maintain codebases
+---
 
-This project explores a better approach: treat landing pages as reusable systems, not one-off designs.
+## ⚡ What It Does
 
-🎯 What This Project Does
+Modular, composable UI sections that assemble into complete landing pages.
 
-The Business Landing Page Generator is designed around modular, composable UI sections that can be assembled into complete landing pages.
+This repo contains the **frontend foundation** — structure, polish, responsiveness, and interaction. The landing page you see is what the generator produces: production-quality, not a mockup.
 
-The current implementation focuses on the frontend foundation:
+---
 
-structure
+## ✨ Features
 
-polish
+🧩 **Modular Sections** — Hero, Features, CTA. Rearrange, reuse, extend.  
+📱 **Responsive by Default** — Mobile-first, scales smoothly.  
+🎥 **Subtle Motion** — Lightweight animations that guide, not distract.  
+🧱 **Scalable Architecture** — Clean components, easy to expand.
 
-responsiveness
+---
 
-interaction
+## 🛠 Built With
 
-The landing page included in this project represents what the generator can produce — a realistic, production-quality example rather than a static mockup.
+- **Next.js** — Framework  
+- **Tailwind CSS** — Styling  
+- **Component-based design** — Architecture  
+- **Lightweight motion utilities** — Animations
 
-✨ Highlights
-🧩 Modular Sections
+*(Backend and generation logic coming later.)*
 
-Hero, Features, Preview, CTA, etc.
+---
 
-Designed to be rearranged, reused, and extended
+## 📦 Current Status
 
-📱 Responsive by Default
+✅ Fully polished landing page  
+✅ Production-ready UI components  
+✅ Responsive layouts & interactions  
+✅ Maintainable project structure
 
-Mobile-first layouts
+---
 
-Smooth scaling across screen sizes
+## 🔮 Roadmap
 
-🎥 Subtle Motion
+- Section selection & composition  
+- Content/theme customization  
+- Export or deployment tools  
+- Backend for saving pages
 
-Lightweight animations to guide attention
+---
 
-Motion enhances clarity, not distraction
+## 🎯 Purpose
 
-🧱 Scalable Architecture
+This project demonstrates:
+- Frontend craftsmanship beyond basic demos  
+- Product thinking, not just visuals  
+- A realistic foundation for a page-generation tool  
+- The bridge between design, UX, and maintainable code
 
-Clean component boundaries
+---
 
-Easy to add new sections or variants
+## 📸 Preview
 
-🛠 Tech Stack
 
-Framework: Next.js
+https://github.com/user-attachments/assets/66f8145f-26e3-4639-97d4-188849648864
 
-Styling: Tailwind CSS
 
-UI Architecture: Component-based design
+---
 
-Animations: CSS / lightweight motion utilities
-
-(Backend and generation logic are intentionally out of scope for this phase.)
-
-📦 Current Scope
-
-✔ Fully built and polished landing page
-✔ Reusable, production-ready UI components
-✔ Responsive layouts and interaction patterns
-✔ Maintainable project structure
-
-🔮 What’s Next
-
-Planned improvements include:
-
-section selection & composition logic
-
-content and theme customization
-
-export or deployment options
-
-backend integration for saving pages
-
-🧪 Why This Project Exists
-
-This project was built to:
-
-showcase frontend craftsmanship beyond basic UI demos
-
-demonstrate product-level thinking, not just visuals
-
-create a realistic foundation for a future page-generation tool
-
-bridge design, UX, and maintainable code
-
-📸 Preview
-
- <img width="1430" height="858" alt="Screenshot 2026-01-11 at 20 58 47" src="https://github.com/user-attachments/assets/953134cf-a30d-4f2d-904b-2ce8b9c243b2" />
-
-🧭 Status
-
-Frontend foundation complete.
-Actively evolving toward a fully functional landing page generator.
-
-💬 Final note
-
-This project prioritizes clarity, polish, and scalability — the same principles required when building real products for businesses and users.
+**Status:** Frontend complete. Evolving toward full generator functionality.
