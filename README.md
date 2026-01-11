@@ -102,7 +102,7 @@ bridge design, UX, and maintainable code
 
 📸 Preview
 
-(Add screenshots or a short demo video here)
+ <img width="1430" height="858" alt="Screenshot 2026-01-11 at 20 58 47" src="https://github.com/user-attachments/assets/953134cf-a30d-4f2d-904b-2ce8b9c243b2" />
 
 🧭 Status
 
