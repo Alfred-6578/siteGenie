@@ -73,9 +73,9 @@ const Navbar = () => {
                 }
             </div>
 
-            <button className='button-gradient text-body-text! rounded px-4 py-2 font-semibold max-lg:hidden'>
+            <Link href={'/generate'} className='button-gradient text-body-text! rounded px-4 py-2 font-semibold max-lg:hidden'>
                 Get Started
-            </button>
+            </Link>
             <div className={`lg:hidden! burger-icon ${isOpen ? 'active' : ''} max-tny:h-4!`} onClick={() => setIsOpen(!isOpen)}>
                <span className='max-tny:w-6! max-tny:h-0.5!'></span>
                <span className='max-tny:w-6! max-tny:h-0.5!'></span>

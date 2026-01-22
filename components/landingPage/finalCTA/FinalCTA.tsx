@@ -5,6 +5,7 @@ import FloatingShape from './FloatingShape';
 import ParticleSystem from './ParticleSystem';
 import Confetti from './Confetti';
 import { useInView } from '@/hooks/useInView';
+import Link from 'next/link';
 
 const FinalCTA = () => {
   const [showConfetti, setShowConfetti] = useState(false);
@@ -113,12 +114,12 @@ const FinalCTA = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white via-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
             
-            <span className="relative z-10 flex max-vsm:text-[15px] items-center gap-3 group-hover:text-white transition-colors duration-300">
+            <Link href={'/generate'} className="relative z-10 flex max-vsm:text-[15px] items-center gap-3 group-hover:text-white transition-colors duration-300">
               Start Building Free
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-2 opacity-0 group-hover:opacity-100">
                 →
               </span>
-            </span>
+            </Link>
           </button>
 
          

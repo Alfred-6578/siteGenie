@@ -2,6 +2,7 @@ import { Space_Grotesk } from 'next/font/google'
 import React from 'react'
 import Pill from '../../ui/Pill'
 import {ArrowRight} from 'lucide-react'
+import Link from 'next/link'
 
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin']})
@@ -27,9 +28,11 @@ const LeftHeroContent = () => {
                 <Pill key={btnText} title={btnText} className={`bg-white/5 max-tny:w-[100%] sm:text-sm border border-white/10 animate-delay-${(150 * index ) + 500} ${index == 2 ? 'lg:hidden xl:flex':''}`} fade='fades-in' slide='slide-up-stagger'/>
             ))}
         </div>
-        <button className="flex gap-2 max-smk:w-full text-body-text! max-lg:justify-center max-smk:px-3! max max-tny:w-[90%] max-tny:px-4 justify-between items-center button-gradient rounded-lg cursor-pointer py-3 px-6 font-semibold mt-6 lg:mt-3 fade-in slide-up animate-delay-600">
-            Generate Your First Page <ArrowRight />
-        </button>
+        <Link href={'/generate'}>
+            <button className="flex gap-2 max-smk:w-full text-body-text! max-lg:justify-center max-smk:px-3! max max-tny:w-[90%] max-tny:px-4 justify-between items-center button-gradient rounded-lg cursor-pointer py-3 px-6 font-semibold mt-6 lg:mt-3 fade-in slide-up animate-delay-600">
+                Generate Your First Page <ArrowRight />
+            </button>
+        </Link>
     </div>
   )
 }

@@ -63,6 +63,10 @@ interface items {
   content: string
 }
 
+export type RightColumnContent = 
+  | { type: 'list'; items: items[] }
+  | { type: 'paragraph'; content: string }
+
 export interface TwoColContentSection extends BaseSection {
   type: 'content'
   layout: 'two-col'
@@ -74,8 +78,7 @@ export interface TwoColContentSection extends BaseSection {
   }
   right: {
     title?: string
-    items: items[]
-  }
+  } & RightColumnContent
   ctaText?: string
   ctaUrl?: string
 }

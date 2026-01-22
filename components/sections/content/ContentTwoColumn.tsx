@@ -44,17 +44,23 @@ export function ContentTwoColumn({ section, isEditing }: ContentSingleProps) {
                     
                  
                     <div className="space-y-4">
-                        {
-                            section.right.items.map((item,index)=>(
+                        {section.right.type === 'list' ? (
+                            <div className="space-y-4">
+                                {section.right.items.map((item, index) => (
                                 <div key={index} className="flex gap-3">
                                     <span className="text-green-400 mt-1">✓</span>
                                     <div>
-                                        <div className="font-semibold text-[var(--color-surface)]">{item?.title}</div>
-                                        <div className="text-sm text-[var(--color-background)]/70">{item?.content}</div>
+                                    <div className="font-semibold">{item.title}</div>
+                                    <div className="text-sm">{item.content}</div>
                                     </div>
                                 </div>
-                            ))
-                        }
+                                ))}
+                            </div>
+                            ) : (
+                            <p className="text-lg leading-relaxed">
+                                {section.right.content}
+                            </p>
+                            )}
                     </div>
                 </div>
             </div>

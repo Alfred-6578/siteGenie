@@ -12,10 +12,10 @@ const GenerateNavbar = () => {
                 <Image className="w-38 h-18 tny:w-40 pulse" src={require('@/assets/logo.png')} alt='Logo' loading='eager'/>
             </Link>
             
-            <span className="text-headings flex gap-2">
+            <Link href={'/'} className="text-headings flex gap-2">
                 <ArrowLeft />
                 Back
-            </span>
+            </Link>
             
         </nav>
     </div>

@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           ],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 2048, // Increased for landing page content
+            maxOutputTokens: 8048, // Increased for landing page content
             topP: 0.95,
             topK: 40,
           },

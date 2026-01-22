@@ -108,9 +108,19 @@ const generateSystemPrompt = ():string =>{
 
     LAYOUT SELECTION LOGIC:
     - Hero: centered=simple/text-focused, split=product showcase, background=visual brand
-    - Features: grid=3-6 equal items, cards=detailed items, alternating=2-4 major features
+    - Features: 
+    * grid=3-6 items (use when features are equal in importance, create 3-6 features total based on user input)
+    * cards=3-6 items (use when features need more detail/explanation, create 3-6 features total)
+    * alternating=2-4 items (use for major flagship features only, create 2-4 features total)
     - Content: single=mission statement, two-col=benefits+details, image=visual story
     - CTA: centered=single offer, split=offer+trust element
+
+        FEATURE COUNT RULES:
+    - If user provides 1-2 features: Expand to 3 features minimum
+    - If user provides 3 features: Keep at 3 (grid/cards) or use all 3 (alternating)
+    - If user provides 4-5 features: Use all 4-5 (grid/cards) or pick top 4 (alternating)
+    - If user provides 6+ features: Use best 6 for grid/cards, or best 3-4 for alternating
+    - NEVER exceed 6 features for grid/cards or 4 for alternating
 
     CONTENT LAYOUT RULES:
     - If layout = single → data must include headline and content
@@ -118,31 +128,70 @@ const generateSystemPrompt = ():string =>{
     - If layout = image → data must include imagePrompt
     - Do NOT include unused fields
 
-    CONTENT SECTION - TWO-COLUMN LAYOUT VARIATIONS:
 
-    Choose the right two-column structure based on business type:
+    
+    CONTENT SECTION - TWO-COLUMN LAYOUT:
+    
+    LEFT COLUMN (Always uses this structure):
+    {
+      "title": "string (column heading)",
+      "items": [
+        {
+          "title": "string (item title)",
+          "description": "string (brief detail)"
+        }
+      ]
+    }
+    
+    RIGHT COLUMN (Choose format based on business type):
+    
+    FORMAT 1 - LIST (Use for direct mapping/solutions):
+    {
+      "title": "string (column heading)",
+      "items": [
+        {
+          "title": "string (item title)",
+          "content": "string (brief detail)"
+        }
+      ]
+    }
+    
+    FORMAT 2 - PARAGRAPH (Use for processes/explanations):
+    {
+      "title": "string (column heading)",
+      "content": "string (paragraph text explaining process or details)"
+    }
+    
+    WHEN TO USE EACH FORMAT:
+    
+    1. PROBLEM → SOLUTION (Use LIST format)
+       Left: "Common Challenges" with pain points
+       Right: "Our Solutions" with corresponding solutions
+       Industries: Consulting, Finance, Healthcare, Services
+       
+    2. BEFORE → AFTER (Use LIST format)
+       Left: "Before" with current pain state
+       Right: "After" with improved state
+       Industries: Fitness, Coaching, Education, Transformation services
+       
+    3. BENEFITS → HOW IT WORKS (Use PARAGRAPH format)
+       Left: "Key Benefits" with benefit list
+       Right: "How It Works" with process explanation
+       Industries: SaaS, Tech Products, Platforms
+       
+    4. FEATURES → USE CASES (Use PARAGRAPH or LIST format)
+       Left: "What You Can Do" with feature list
+       Right: "Perfect For" with use case examples (paragraph works best)
+       Industries: Tools, Multi-purpose platforms
+    
+    DEFAULT: Use FORMAT 1 (LIST) for both columns when unsure.
+    Use FORMAT 2 (PARAGRAPH) only when explaining a process or giving detailed explanation.
+    
 
-    1. PROBLEM vs SOLUTION (Services, Consulting, B2B)
-    Left: Common pain points/challenges
-    Right: How your service solves each one
-    Example: Financial challenges → Strategic solutions
-
-    2. BENEFITS vs DETAILS (Tech, SaaS, Products)
-    Left: Key benefits list
-    Right: Detailed explanation of how/why
-    Example: Save time → Automate 80% of tasks
-
-    3. HOW IT WORKS vs WHAT YOU GET (Platforms, Tools)
-    Left: Step-by-step process
-    Right: Deliverables/outcomes
-    Example: 3-step process → Dashboard + Reports
-
-    4. BEFORE vs AFTER (Transformation, Coaching)
-    Left: Current pain state
-    Right: Desired future state
-    Example: Manual chaos → Automated ease
-
-    Default to PROBLEM vs SOLUTION for professional services.
+    Choose based on business type:
+    - Services/Consulting → Use LIST (Problem→Solution)
+    - SaaS/Products → Use PARAGRAPH or LIST (Benefits→Details)
+    - Transformation → Use LIST (Before→After)
 
 
 
@@ -299,6 +348,8 @@ const parseAIResponse = (aiResponse:string, formData:BusinessFormData)=>{
         } else if (cleanResponse.startsWith('```')) {
             cleanResponse = cleanResponse.replace(/```\n?/g, '')
         }
+        console.log(cleanResponse)
+
 
         const parsed = JSON.parse(cleanResponse)
 
@@ -373,6 +424,7 @@ const parseAIResponse = (aiResponse:string, formData:BusinessFormData)=>{
                 order: 3,
                 layout: parsed.cta.layout || 'two-col',
                 headline: parsed.cta.headline,
+                subheadline: parsed.cta.subheadline,
                 ctaText: parsed.cta.ctaText,
                 ctaUrl: '#'
                 
