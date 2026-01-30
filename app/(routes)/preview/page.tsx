@@ -1,4 +1,5 @@
 'use client'
+import EditorPanel from '@/components/editor/EditorPanel'
 import PreviewPage from '@/components/editor/PreviewPage'
 import AIGenerationError from '@/components/preview/AiGenerationError'
 import AIGenerationLoader from '@/components/preview/AiGenerationLoader'
@@ -34,6 +35,8 @@ const Preview = () => {
 
   return (
     <div className=''>
+        <EditorPanel />
+        <div className="h-6"></div>
         <PreviewPage landingPage={landingPage}/>
     </div>
   )

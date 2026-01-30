@@ -31,6 +31,7 @@ export interface HeroSection extends BaseSection {
   ctaText: string
   ctaUrl: string
   image?: string
+  imageAlt?: string
   backgroundImage?: string
 }
 
@@ -39,6 +40,8 @@ export interface Feature {
   title: string
   description: string
   icon: string
+  imageAlt?: string
+  image?: string
 }
 
 export interface FeaturesSection extends BaseSection {
@@ -49,55 +52,63 @@ export interface FeaturesSection extends BaseSection {
   features: Feature[]
 }
 
-export interface SingleContentSection extends BaseSection {
-  type: 'content'
-  layout: 'single'
-  headline: string
-  content: string
-  ctaText?: string
-  ctaUrl?: string
-}
 
 interface items {
   title: string
-  content: string
+  description: string
 }
 
 export type RightColumnContent = 
   | { type: 'list'; items: items[] }
   | { type: 'paragraph'; content: string }
 
-export interface TwoColContentSection extends BaseSection {
+
+interface ImageContentStories {
+  title: string ,
+  content: string,
+  imagePosition: 'left' | 'right',   
+  imageAlt?: string 
+  image?: string
+}
+
+
+export interface ContentSection extends BaseSection {
   type: 'content'
-  layout: 'two-col'
-  headline: string
-  subheadline?: string
-  left: {
-    title?: string
-    items: items[]
+  layout: 'single' | 'two-col' | 'image'
+  
+  single: {
+    headline: string
+    subheadline?: string
+    content: string
+    ctaText?: string
+    ctaUrl?: string
+    image?: string
+    imageAlt?: string 
+    includeImage?: boolean
   }
-  right: {
-    title?: string
-  } & RightColumnContent
-  ctaText?: string
-  ctaUrl?: string
+  
+  twoCol: {
+    headline: string
+    subheadline?: string
+    left: {
+      title?: string
+      items: items[]
+    }
+    right: {
+      title?: string
+    } & RightColumnContent
+    ctaText?: string
+    ctaUrl?: string
+  }
+  
+  image: {
+    headline: string
+    subheadline?: string
+    stories: ImageContentStories[]
+    ctaText?: string
+    ctaUrl?: string
+  }
 }
-
-export interface ImageContentSection extends BaseSection {
-  type: 'content'
-  layout: 'image'
-  headline?: string
-  image: string
-  content?: string
-  ctaText?: string
-  ctaUrl?: string
-}
-
-
-export type ContentSection =
-  | SingleContentSection
-  | TwoColContentSection
-  | ImageContentSection
 
 
 export interface Testimonial {
@@ -145,6 +156,8 @@ export interface CTASection extends BaseSection {
   ctaText: string
   ctaUrl: string
   image?: string
+  ctaTitle: string;
+  ctaDescription: string;
 }
 
 export interface FAQItem {

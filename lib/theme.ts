@@ -108,14 +108,14 @@ export const COLOR_PALETTES: Record<string, ColorPalette> = {
 }
 
 export function getPalette(id: string): ColorPalette {
-  return COLOR_PALETTES[id] || COLOR_PALETTES['professional-blue']
+  return COLOR_PALETTES[id] || COLOR_PALETTES['trustworthy-navy']
 }
 
 export function getPaletteByMood(mood: string): ColorPalette {
   const palette = Object.values(COLOR_PALETTES).find(
     (p) => p.mood === mood.toLowerCase()
   )
-  return palette || COLOR_PALETTES['professional-blue']
+  return palette || COLOR_PALETTES['trustworthy-navy']
 }
 
 export function generateCSSVariables(palette: ColorPalette): string {
