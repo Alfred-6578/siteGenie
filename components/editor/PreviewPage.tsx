@@ -11,12 +11,13 @@ const PreviewPage = ({landingPage}:PreviewPageProps) => {
     const sortedSections = [...landingPage.sections].sort((a,b)=> a.order - b.order)
 
   return (
-    <div className=''>
+    <div className='relative'>
         <Navbar 
-            businessName={landingPage.businessName}
+            landingPage={landingPage}
+            
             ctaText={landingPage.sections.find(s => s.type === 'hero')?.ctaText || 'Get Started'}
         />
-        <main className="">
+        <main className="mt-25">
             {
                 sortedSections.map((section)=>(
                     <SectionRenderer key={section.id} section={section} isEditing={true}/>

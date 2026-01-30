@@ -26,10 +26,12 @@ const GeneratePage = () => {
             console.log(generated,'landingPage');
             localStorage.setItem('businessFormData', JSON.stringify(formData))
 
+            setLoading(false)
+            router.push('/preview')
+
         }
 
-        setLoading(false)
-        router.push('/preview')
+        
     }
 
     if (isGenerating) {

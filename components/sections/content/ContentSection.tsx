@@ -2,6 +2,7 @@ import { ContentSection as ContentSectionType } from '@/types/section';
 import React from 'react'
 import { ContentSingle } from './ContentSingle';
 import { ContentTwoColumn } from './ContentTwoColumn';
+import ContentImageLayout from './ContentImage';
 
 export type ContentSectionProps ={
     section: ContentSectionType
@@ -14,7 +15,8 @@ const ContentSection = ({section, isEditing}:ContentSectionProps) => {
         return <ContentSingle section={section} isEditing={isEditing}/>;
     case 'two-col':
         return <ContentTwoColumn section={section} isEditing={isEditing}/>;
-  
+    case 'image':
+        return <ContentImageLayout section={section} isEditing={isEditing}/>;
     default:
         return null;
   }
