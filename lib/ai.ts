@@ -5,7 +5,12 @@ import { title } from "process";
 
 
 const AI_TEST_MODE = process.env.NEXT_PUBLIC_AI_TEST_MODE == 'true'
-const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY 
+const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY
+
+// In development, if the live API fails (overloaded / out of free-tier quota),
+// fall back to mock content so UI work isn't blocked. In production we surface
+// the real error instead of silently serving placeholder copy.
+const AI_FALLBACK_TO_MOCK = process.env.NODE_ENV !== 'production'
 
 const generateSystemPrompt = ():string =>{
     return `
@@ -614,6 +619,22 @@ export const generateLandingPage = async(
         return landingPage
     } catch (error) {
         console.error('Error generating landing page', error)
+
+        // Last-resort fallback for development: if the live API failed (overload
+        // or quota), build the page from mock content so generation never hard-fails.
+        if (AI_FALLBACK_TO_MOCK && !AI_TEST_MODE) {
+            console.warn('Falling back to mock content after AI failure')
+            const sections = parseAIResponse(generateMockResponse(formData), formData)
+            return {
+                id: generateId(),
+                businessName: formData.businessName,
+                theme: formData.colorMood,
+                sections,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            }
+        }
+
         throw error
     }
 }
