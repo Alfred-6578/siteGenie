@@ -507,6 +507,8 @@ function generateContentHTML(section: any): string {
 }
 
 function generateCTAHTML(section: any): string {
+    if (section.layout == "centered") {
+        
     return `
         <section class="py-20 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]">
             <div class="max-w-4xl mx-auto text-center text-white">
@@ -533,6 +535,47 @@ function generateCTAHTML(section: any): string {
             </div>
         </section>
     `
+    }else if (section.layout === "split") {
+        return `
+            <section class="relative py-20 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]">
+               
+                <div class="absolute inset-0 bg-black/10"></div>
+
+                <div class="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="text-white max-w-xl">
+                    <h2 class="text-3xl vsm:text-4xl font-bold mb-6">
+                        ${section.headline}
+                    </h2>
+
+                    <p class="text-xl opacity-90">
+                       ${section.subheadline}
+                    </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-black/5 text-center max-w-md mx-auto w-full">
+                    <h3 class="text-xl font-semibold text-[var(--color-primary)] mb-3">
+                        ${section.ctaTitle || 'Get started in minutes'}
+                    </h3>
+
+                    <p class="text-sm text-gray-600 mb-6">
+                        ${section.ctaDescription || 'No credit card required. Cancel anytime.'}
+                    </p>
+
+                    <button
+                        class="w-full px-6 py-3 bg-[var(--color-primary)] text-white font-semibold rounded-md hover:opacity-90 transition"
+                    >
+                        ${section.ctaText}
+                    </button>
+                    </div>
+
+                </div>
+                </section>
+
+        `
+    }
+        return ''
+
 }
 
 function generateFooterHTML(section: any): string {

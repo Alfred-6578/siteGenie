@@ -14,12 +14,15 @@ export function ContentSkeleton({ layout }: ContentSkeletonProps) {
   if (layout === 'single') {
     return (
       <section className="py-20 px-5 bg-[var(--color-background)] flex justify-center relative">
-        <div className="flex flex-col lg:flex-row-reverse gap-12 w-full max-w-7xl vsm:px-4 lg:items-center justify-center">
+        <div className="flex flex-col lg:flex-row-reverse gap-12 w-full  max-w-7xl vsm:px-4 lg:items-center justify-center">
           {/* Text Content Skeleton */}
-          <div className="mb-12 max-w-4xl mx-auto md:text-center space-y-4">
-            <SkeletonLine width="w-3/4" height="h-10" />
+          <div className="mb-12 max-w-4xl mx-auto md:text-center space-y-4 w-full">
+            <SkeletonLine width="w-3/4 mx-auto" height="h-10" />
             <SkeletonLine width="w-full" height="h-6" />
-            <SkeletonLine width="w-5/6" height="h-6" />
+            <SkeletonLine width="w-full" height="h-6" />
+            <SkeletonLine width="w-full" height="h-6" />
+            <SkeletonLine width="w-full" height="h-6" />
+            <SkeletonLine width="w-5/6 mx-auto" height="h-6" />
             <div className="pt-4">
               <SkeletonLine width="w-40 mx-auto" height="h-10" />
             </div>

@@ -59,6 +59,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
+// Gemini returns these when the model is temporarily overloaded or rate-limited.
+// They're transient, so we retry instead of failing the user's request.
+const RETRYABLE_STATUSES = new Set([429, 500, 503]);
+const MAX_RETRIES = 4;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export async function POST(request: NextRequest) {
   try {
     const { systemPrompt, userPrompt } = await request.json();
@@ -70,40 +77,61 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ✅ Use the correct model name
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `${systemPrompt}\n\n${userPrompt}`,
-                },
-              ],
-            },
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 5048, // Increased for landing page content
-            topP: 0.95,
-            topK: 40,
-          },
-        }),
-      }
-    );
+    let response: Response | undefined;
+    let errorData: unknown = {};
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      // ✅ Use the correct model name
+      response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `${systemPrompt}\n\n${userPrompt}`,
+                  },
+                ],
+              },
+            ],
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 8048, // Increased for landing page content
+              topP: 0.95,
+              topK: 40,
+            },
+          }),
+        }
+      );
+
+      if (response.ok) break;
+
+      errorData = await response.json().catch(() => ({}));
+
+      // Only retry transient overload/rate-limit errors, and not after the last attempt.
+      if (!RETRYABLE_STATUSES.has(response.status) || attempt === MAX_RETRIES) {
+        break;
+      }
+
+      // Exponential backoff with jitter: ~0.5s, 1s, 2s, 4s.
+      const delay = 500 * 2 ** attempt + Math.random() * 250;
+      console.warn(
+        `Gemini API ${response.status}, retrying in ${Math.round(delay)}ms (attempt ${attempt + 1}/${MAX_RETRIES})`
+      );
+      await sleep(delay);
+    }
+
+    if (!response || !response.ok) {
+      const status = response?.status ?? 503;
       console.error('Gemini API Error:', errorData);
       return NextResponse.json(
         { error: 'Gemini API request failed', details: errorData },
-        { status: response.status }
+        { status }
       );
     }
 
