@@ -14,8 +14,8 @@ export function HeroSkeleton({ layout }: HeroSkeletonProps) {
   if (layout === 'centered') {
     return (
       <section className="flex flex-col gap-10 items-center py-20 px-4 pt-25 bg-white min-h-screen">
-        <div className="max-w-4xl text-center space-y-6">
-          <SkeletonLine width="w-3/4 mx-auto" height="h-12" />
+        <div className="max-w-4xl w-full text-center space-y-6">
+          <SkeletonLine width="w-2/3" height="h-12" />
           <SkeletonLine width="w-full mx-auto" height="h-8" />
           <SkeletonLine width="w-5/6 mx-auto" height="h-8" />
           <div className="pt-4">
@@ -56,10 +56,11 @@ export function HeroSkeleton({ layout }: HeroSkeletonProps) {
       <section className="flex justify-center items-center relative py-32 px-4 bg-gray-300 min-h-screen">
         <div className="absolute inset-0 bg-black/80 opacity-60"></div>
 
-        <div className="relative max-w-4xl mx-auto text-center space-y-6">
+        <div className="relative max-w-4xl w-full mx-auto text-center space-y-6">
           <SkeletonLine width="w-2/3 mx-auto" height="h-12" />
           <SkeletonLine width="w-full mx-auto" height="h-8" />
           <SkeletonLine width="w-5/6 mx-auto" height="h-8" />
+          <SkeletonLine width="w-3/4 mx-auto" height="h-8" />
           <div className="pt-4">
             <SkeletonLine width="w-56 mx-auto" height="h-10" />
           </div>

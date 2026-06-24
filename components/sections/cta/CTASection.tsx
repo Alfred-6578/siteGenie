@@ -1,6 +1,7 @@
 import { CTASection as CTASectionType} from '@/types/section'
 import React from 'react'
 import { CTACentered } from './CTACentered';
+import { CTASplit } from './CTASplit';
 
 export type CTASectionProps ={
     section: CTASectionType
@@ -10,8 +11,11 @@ export type CTASectionProps ={
 const CTASection = ({section, isEditing}:CTASectionProps) => {
   switch (section.layout) {
     case 'centered':
-        
         return  <CTACentered section={section} isEditing={isEditing}/>
+
+    case 'split':      
+        return  <CTASplit section={section} isEditing={isEditing}/>
+  
   
     default:
         return null;
